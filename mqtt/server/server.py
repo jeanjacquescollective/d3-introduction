@@ -86,10 +86,10 @@ def publish_data():
             client.publish('channel/network_traffic', network_traffic)
             print(f"Published: {network_traffic} to channel/network_traffic")
 
-            # Genereer gegevens voor een heatmap
-            heatmap_value = round(random.uniform(0.0, 100.0), 2)
-            client.publish('channel/heatmap', heatmap_value)
-            print(f"Published: {heatmap_value} to channel/heatmap")
+            # Genereer gegevens voor een heatmap (10x10 gegevens)
+            heatmap_data = [[round(random.uniform(0.0, 100.0), 2) for _ in range(10)] for _ in range(10)]
+            client.publish('channel/heatmap', str(heatmap_data))
+            print(f"Published: {heatmap_data} to channel/heatmap")
 
             # Genereer gegevens voor een stacked area chart
             stacked_area_value = round(random.uniform(0.0, 100.0), 2)

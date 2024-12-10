@@ -1,12 +1,14 @@
 import createBarChart from "./barChart.mjs";
+import createHeatMap from "./heatMap.mjs";
 import createSpiderChart from "./spiderChart.mjs";
 
-connectToBroker(['channel/temperature', 'channel/pressure', 'channel/humidity', 'channel/comparative_categories']);
+connectToBroker(['channel/temperature', 'channel/pressure', 'channel/humidity', 'channel/comparative_categories', 'channel/heatmap']);
 // Example usage:
 const temperatureChart = createBarChart("#temperatureChart", 600, 300, 'channel/temperature', 'steelblue');
 const pressureChart = createBarChart("#pressureChart", 600, 300, 'channel/pressure', 'green');
 const humidityChart = createBarChart("#humidityChart", 600, 300, 'channel/humidity', 'orange');
 const radarChart = createSpiderChart("#radarChart", 600, 600, 'channel/comparative_categories', 'red');
+const heatMap = createHeatMap("#heatMap", 600, 300, 'channel/heatmap', 'blue');
 
 function connectToBroker(topics) {
 
@@ -39,6 +41,10 @@ function connectToBroker(topics) {
         if (topic === "channel/comparative_categories") {
             console.log(`Received message on ${topic}: ${message}`);
             radarChart.updateChart(message);
+        }
+        if (topic === "channel/heatmap") {
+            console.log(`Received message on ${topic}: ${message}`);
+            heatMap.updateChart(JSON.parse(message));
         }
     });
 }
