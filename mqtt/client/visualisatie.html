@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3 MQTT Visualisatie</title>
+    <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            width: 100%;
+            /* max-width: 1200px; */
+        }
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            flex-shrink: 1;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+        }
+
+        svg{
+            width: 100%;
+            height: 300px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <h2>MQTT Data Dashboard</h2>
+    <div class="dashboard">
+        <div class="chart-container" id="temperatureChart"></div>
+        <div class="chart-container" id="pressureChart"></div>
+        <div class="chart-container" id="humidityChart"></div>
+        <div class="chart-container" id="radarChart"></div>
+    </div>
+    <div class="tooltip" style="visibility: hidden;"></div>
+    <script src="./js/charts.js" type="module"></script>
+</body>
+</html>

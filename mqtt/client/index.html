@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT Subscriber</title>
+    <script src="https://cdn.jsdelivr.net/npm/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+    <a href="visualisatie.html">Visualisatie</a>
+    <script>
+        // Verbinden met de MQTT broker
+        const client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt');
+
+        client.on('connect', () => {
+            console.log('Verbonden met MQTT broker');
+            client.subscribe('channel/temperature');
+            client.subscribe('channel/humidity');
+            client.subscribe('channel/pressure');
+        });
+
+        client.on('message', (topic, message) => {
+            console.log(`Ontvangen van ${topic}: ${message.toString()}`);
+        });
+    </script>
+</body>
+</html>
